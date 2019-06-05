@@ -6,11 +6,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YumiMobileResponseModel.h"
+#import "YumiMobileRequestModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YumiMobileRequestManager : NSObject
-
++ (instancetype)sharedManager;
+- (void)requestAdWithRequestModel:(YumiMobileRequestModel *)model
+                               ua:(NSString *)ua
+                          success:(void (^)(YumiMobileResponseModel *ad))success
+                          failure:(void (^)(NSError *error))failure;
 @end
 
 NS_ASSUME_NONNULL_END
