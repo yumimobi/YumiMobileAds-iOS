@@ -9,34 +9,21 @@
 Pod::Spec.new do |s|
   s.name             = 'YumiMobileAds'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of YumiMobileAds.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
-
-  s.homepage         = 'https://github.com/wzy2010416033@163.com/YumiMobileAds'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.summary          = 'YumiMobileAds for iOS.'
+  s.description      = 'The Yumi Mobile Ads SDK is the latest generation in Yumi mobile advertising featuring refined ad formats and streamlined APIs for access to mobile ad networks and advertising solutions. The SDK enables mobile app developers to maximize their monetization on Android and iOS. The Yumi Mobile Ads SDK is available to customers.' 
+  s.homepage         = 'https://www.yumimobi.com'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'wzy2010416033@163.com' => 'wzy2010416033@163.com' }
-  s.source           = { :git => 'https://github.com/wzy2010416033@163.com/YumiMobileAds.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
-  s.ios.deployment_target = '8.0'
-
+  s.author           = { 'YumiSDK' => 'wzy2010416033@163.com' }
+  s.source           = { :git => 'https://github.com/yumimobi/YumiMobileAds-iOS.git', :tag => s.version.to_s }
+  s.ios.deployment_target = '9.0'
   s.source_files = 'YumiMobileAds/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'YumiMobileAds' => ['YumiMobileAds/Assets/*.png']
-  # }
+  s.resource_bundles = {
+   'YumiMobileAds' => ['YumiMobileAds/Assets/*']
+  }
+  s.xcconfig = { 
+    'OTHER_LDFLAGS' => '-ObjC', 
+  }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
