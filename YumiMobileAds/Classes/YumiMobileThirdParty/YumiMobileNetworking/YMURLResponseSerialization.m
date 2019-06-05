@@ -31,11 +31,11 @@
 #import <Cocoa/Cocoa.h>
 #endif
 
-NSString *const YMURLResponseSerializationErrorDomain = @"com.playableads.error.serialization.response";
+NSString *const YMURLResponseSerializationErrorDomain = @"com.yumimobileads.error.serialization.response";
 NSString *const YMNetworkingOperationFailingURLResponseErrorKey =
-    @"com.playableads.serialization.response.error.response";
+    @"com.yumimobileads.serialization.response.error.response";
 NSString *const YMNetworkingOperationFailingURLResponseDataErrorKey =
-    @"com.playableads.serialization.response.error.data";
+    @"com.yumimobileads.serialization.response.error.data";
 
 static NSError *YMErrorWithUnderlyingError(NSError *error, NSError *underlyingError) {
     if (!error) {

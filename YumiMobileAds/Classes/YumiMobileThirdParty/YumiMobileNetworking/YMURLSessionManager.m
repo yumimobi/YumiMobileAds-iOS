@@ -33,7 +33,7 @@ static dispatch_queue_t url_session_manager_creation_queue() {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         af_url_session_manager_creation_queue =
-            dispatch_queue_create("com.playableads.networking.session.manager.creation", DISYMTCH_QUEUE_SERIAL);
+            dispatch_queue_create("com.yumimobileads.networking.session.manager.creation", DISPATCH_QUEUE_SERIAL);
     });
 
     return af_url_session_manager_creation_queue;
@@ -55,7 +55,7 @@ static dispatch_queue_t url_session_manager_processing_queue() {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         af_url_session_manager_processing_queue =
-            dispatch_queue_create("com.playableads.networking.session.manager.processing", DISYMTCH_QUEUE_CONCURRENT);
+            dispatch_queue_create("com.yumimobileads.networking.session.manager.processing", DISPATCH_QUEUE_CONCURRENT);
     });
 
     return af_url_session_manager_processing_queue;
@@ -71,22 +71,22 @@ static dispatch_group_t url_session_manager_completion_group() {
     return af_url_session_manager_completion_group;
 }
 
-NSString *const YMNetworkingTaskDidResumeNotification = @"com.playableads.networking.task.resume";
-NSString *const YMNetworkingTaskDidCompleteNotification = @"com.playableads.networking.task.complete";
-NSString *const YMNetworkingTaskDidSuspendNotification = @"com.playableads.networking.task.suspend";
-NSString *const YMURLSessionDidInvalidateNotification = @"com.playableads.networking.session.invalidate";
+NSString *const YMNetworkingTaskDidResumeNotification = @"com.yumimobileads.networking.task.resume";
+NSString *const YMNetworkingTaskDidCompleteNotification = @"com.yumimobileads.networking.task.complete";
+NSString *const YMNetworkingTaskDidSuspendNotification = @"com.yumimobileads.networking.task.suspend";
+NSString *const YMURLSessionDidInvalidateNotification = @"com.yumimobileads.networking.session.invalidate";
 NSString *const YMURLSessionDownloadTaskDidFailToMoveFileNotification =
-    @"com.playableads.networking.session.download.file-manager-error";
+    @"com.yumimobileads.networking.session.download.file-manager-error";
 
 NSString *const YMNetworkingTaskDidCompleteSerializedResponseKey =
-    @"com.playableads.networking.task.complete.serializedresponse";
+    @"com.yumimobileads.networking.task.complete.serializedresponse";
 NSString *const YMNetworkingTaskDidCompleteResponseSerializerKey =
-    @"com.playableads.networking.task.complete.responseserializer";
-NSString *const YMNetworkingTaskDidCompleteResponseDataKey = @"com.playableads.networking.complete.finish.responsedata";
-NSString *const YMNetworkingTaskDidCompleteErrorKey = @"com.playableads.networking.task.complete.error";
-NSString *const YMNetworkingTaskDidCompleteAssetPathKey = @"com.playableads.networking.task.complete.assetpath";
+    @"com.yumimobileads.networking.task.complete.responseserializer";
+NSString *const YMNetworkingTaskDidCompleteResponseDataKey = @"com.yumimobileads.networking.complete.finish.responsedata";
+NSString *const YMNetworkingTaskDidCompleteErrorKey = @"com.yumimobileads.networking.task.complete.error";
+NSString *const YMNetworkingTaskDidCompleteAssetPathKey = @"com.yumimobileads.networking.task.complete.assetpath";
 
-static NSString *const YMURLSessionManagerLockName = @"com.playableads.networking.session.manager.lock";
+static NSString *const YMURLSessionManagerLockName = @"com.yumimobileads.networking.session.manager.lock";
 
 static NSUInteger const YMMaximumNumberOfAttemptsToRecreateBackgroundSessionUploadTask = 3;
 
@@ -369,9 +369,9 @@ static inline BOOL af_addMethod(Class theClass, SEL selector, Method method) {
     return class_addMethod(theClass, selector, method_getImplementation(method), method_getTypeEncoding(method));
 }
 
-static NSString *const YMNSURLSessionTaskDidResumeNotification = @"com.playableads.networking.nsurlsessiontask.resume";
+static NSString *const YMNSURLSessionTaskDidResumeNotification = @"com.yumimobileads.networking.nsurlsessiontask.resume";
 static NSString *const YMNSURLSessionTaskDidSuspendNotification =
-    @"com.playableads.networking.nsurlsessiontask.suspend";
+    @"com.yumimobileads.networking.nsurlsessiontask.suspend";
 
 @interface _YMURLSessionTaskSwizzling : NSObject
 
@@ -710,7 +710,7 @@ static NSString *const YMNSURLSessionTaskDidSuspendNotification =
         dispatch_semaphore_signal(semaphore);
     }];
 
-    dispatch_semaphore_wait(semaphore, DISYMTCH_TIME_FOREVER);
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 
     return tasks;
 }

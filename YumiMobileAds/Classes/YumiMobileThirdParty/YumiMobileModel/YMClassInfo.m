@@ -385,7 +385,7 @@ YMEncodingType YMEncodingGetType(const char *typeEncoding) {
                                               &kCFTypeDictionaryValueCallBacks);
         lock = dispatch_semaphore_create(1);
     });
-    dispatch_semaphore_wait(lock, DISYMTCH_TIME_FOREVER);
+    dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
     YMClassInfo *info =
         CFDictionaryGetValue(class_isMetaClass(cls) ? metaCache : classCache, (__bridge const void *)(cls));
     if (info && info->_needUpdate) {
@@ -395,7 +395,7 @@ YMEncodingType YMEncodingGetType(const char *typeEncoding) {
     if (!info) {
         info = [[YMClassInfo alloc] initWithClass:cls];
         if (info) {
-            dispatch_semaphore_wait(lock, DISYMTCH_TIME_FOREVER);
+            dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
             CFDictionarySetValue(info.isMeta ? metaCache : classCache, (__bridge const void *)(cls),
                                  (__bridge const void *)(info));
             dispatch_semaphore_signal(lock);

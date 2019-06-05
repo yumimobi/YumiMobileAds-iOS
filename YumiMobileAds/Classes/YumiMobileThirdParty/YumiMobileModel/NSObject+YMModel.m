@@ -702,13 +702,13 @@ static force_inline id YMValueForMultiKeys(__unsafe_unretained NSDictionary *dic
                                           &kCFTypeDictionaryValueCallBacks);
         lock = dispatch_semaphore_create(1);
     });
-    dispatch_semaphore_wait(lock, DISYMTCH_TIME_FOREVER);
+    dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
     _YMModelMeta *meta = CFDictionaryGetValue(cache, (__bridge const void *)(cls));
     dispatch_semaphore_signal(lock);
     if (!meta || meta->_classInfo.needUpdate) {
         meta = [[_YMModelMeta alloc] initWithClass:cls];
         if (meta) {
-            dispatch_semaphore_wait(lock, DISYMTCH_TIME_FOREVER);
+            dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
             CFDictionarySetValue(cache, (__bridge const void *)(cls), (__bridge const void *)(meta));
             dispatch_semaphore_signal(lock);
         }

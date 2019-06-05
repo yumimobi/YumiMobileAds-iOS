@@ -28,7 +28,7 @@
 #import <netinet/in.h>
 #import <netinet6/in6.h>
 
-NSString *const YMNetworkingReachabilityDidChangeNotification = @"com.playableads.networking.reachability.change";
+NSString *const YMNetworkingReachabilityDidChangeNotification = @"com.yumimobileads.networking.reachability.change";
 NSString *const YMNetworkingReachabilityNotificationStatusItem = @"YMNetworkingReachabilityNotificationStatusItem";
 
 typedef void (^YMNetworkReachabilityStatusBlock)(YMNetworkReachabilityStatus status);
@@ -154,7 +154,7 @@ static void YMNetworkReachabilityReleaseCallback(const void *info) {
     struct sockaddr_in6 address;
     bzero(&address, sizeof(address));
     address.sin6_len = sizeof(address);
-    address.sin6_family = YM_INET6;
+    address.sin6_family = AF_INET6;
 #else
     struct sockaddr_in address;
     bzero(&address, sizeof(address));
@@ -227,7 +227,7 @@ static void YMNetworkReachabilityReleaseCallback(const void *info) {
     SCNetworkReachabilitySetCallback(self.networkReachability, YMNetworkReachabilityCallback, &context);
     SCNetworkReachabilityScheduleWithRunLoop(self.networkReachability, CFRunLoopGetMain(), kCFRunLoopCommonModes);
 
-    dispatch_async(dispatch_get_global_queue(DISYMTCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         SCNetworkReachabilityFlags flags;
         if (SCNetworkReachabilityGetFlags(self.networkReachability, &flags)) {
             YMPostReachabilityStatusChange(flags, callback);

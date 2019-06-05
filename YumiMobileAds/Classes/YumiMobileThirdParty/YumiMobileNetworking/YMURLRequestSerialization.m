@@ -27,9 +27,9 @@
 #import <CoreServices/CoreServices.h>
 #endif
 
-NSString *const YMURLRequestSerializationErrorDomain = @"com.playableads.error.serialization.request";
+NSString *const YMURLRequestSerializationErrorDomain = @"com.yumimobileads.error.serialization.request";
 NSString *const YMNetworkingOperationFailingURLRequestErrorKey =
-    @"com.playableads.serialization.request.error.response";
+    @"com.yumimobileads.serialization.request.error.response";
 
 typedef NSString * (^YMQueryStringSerializationBlock)(NSURLRequest *request, id parameters,
                                                       NSError *__autoreleasing *error);
@@ -223,7 +223,7 @@ static void *YMHTTPRequestSerializerObserverContext = &YMHTTPRequestSerializerOb
 
     self.mutableHTTPRequestHeaders = [NSMutableDictionary dictionary];
     self.requestHeaderModificationQueue =
-        dispatch_queue_create("playableAdsRequestHeaderModificationQueue", DISYMTCH_QUEUE_CONCURRENT);
+        dispatch_queue_create("yumimobileadsRequestHeaderModificationQueue", DISPATCH_QUEUE_CONCURRENT);
 
     // Accept-Language HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
     NSMutableArray *acceptLanguagesComponents = [NSMutableArray array];
@@ -465,7 +465,7 @@ static void *YMHTTPRequestSerializerObserverContext = &YMHTTPRequestSerializerOb
     NSOutputStream *outputStream = [[NSOutputStream alloc] initWithURL:fileURL append:NO];
     __block NSError *error = nil;
 
-    dispatch_async(dispatch_get_global_queue(DISYMTCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 
