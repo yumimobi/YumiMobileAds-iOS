@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'YumiMobileAds_Example' do
+  pod 'YumiMobileAds', :path => '../'
+
+  target 'YumiMobileAds_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
