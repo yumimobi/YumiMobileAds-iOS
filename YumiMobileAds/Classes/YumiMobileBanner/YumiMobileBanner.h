@@ -39,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype) new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-- (void)setFrame:(CGRect)frame NS_UNAVAILABLE;
 
 /// Initializes and returns a banner view relative to the banner's superview.
 - (instancetype)initWithSSPToken:(NSString *)sspToken

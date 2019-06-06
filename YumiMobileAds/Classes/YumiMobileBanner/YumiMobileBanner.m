@@ -7,7 +7,15 @@
 
 #import "YumiMobileBanner.h"
 #import "YumiMobileRequestManager.h"
+#import "YumiMobileResponseModel.h"
+#import "YumiMobileTools.h"
 #import <WebKit/WebKit.h>
+
+#define YumiMobileImageUrlConstant @"##IMG-SRC-URL##"
+#define YumiMobileTitleConstant @"##TITLE##"
+#define YumiMobiletargetUrlConstant @"##A-HREF-URL##"
+#define YumiMobileDescConstant @"##DESC##"
+#define YumiMobileLogoUrlConstant @"##YUMI_LOGO_URL##"
 
 @interface YumiMobileBanner ()<WKNavigationDelegate>
 @property (nonatomic) NSString *sspToken;
@@ -19,6 +27,7 @@
 @property (nonatomic, assign) CGSize adSize;
 
 @property (nonatomic) WKWebView *web;
+@property (nonatomic) YumiMobileAdsModel *ad;
 @end
 
 @implementation YumiMobileBanner
@@ -42,6 +51,11 @@
         self.adSize = CGSizeMake(728, 90);
     }
     
+    self.frame = CGRectMake(0, 0, self.adSize.width, self.adSize.height);
+    self.backgroundColor = [UIColor blackColor];
+    self.web = [[WKWebView alloc] initWithFrame:self.frame];
+    [self addSubview:self.web];
+    
     return self;
 }
 
@@ -53,7 +67,6 @@
     if (self.gdprConsentStatus == YumiMobileGDPRConsentStatusNonPersonalized) {
         gdprConsentStatus = @"no";
     }
-    
     // request model
     YumiMobileRequestModel *requestModel =
     [[YumiMobileRequestModel alloc]
@@ -63,15 +76,71 @@
                            adType:kYumiMobileAdBanner
                            adSize:self.adSize
                 gdprConsentStatus:gdprConsentStatus];
+    __weak __typeof(self)weakSelf = self;
     // request server
     [[YumiMobileRequestManager sharedManager]
      requestAdWithRequestModel:requestModel
                        success:^(YumiMobileResponseModel * _Nonnull ad) {
-
+                           weakSelf.ad = ad.ads.firstObject;
+                           [weakSelf setUpBannerMaterial];
                       }failure:^(NSError * _Nonnull error) {
-
-    }];
+                          [weakSelf errorHandler:error];
+                      }];
     
+}
+
+- (void)setUpBannerMaterial {
+    NSString *resourceName = @"";
+    // image
+    if (self.ad.materailType == 1) {
+        resourceName = @"banner-3";
+    }
+    // image & text
+    if (self.ad.materailType == 2) {
+        resourceName = @"banner-1";
+    }
+    // text
+    if (self.ad.materailType == 5) {
+        resourceName = @"banner-2";
+    }
+    NSString *htmlPath = [[[YumiMobileTools sharedTool] resourcesBundleWithBundleName:@"YumiMobileAds"] pathForResource:resourceName ofType:@"html"];
+    NSString *logoPath = [[[YumiMobileTools sharedTool] resourcesBundleWithBundleName:@"YumiMobileAds"] pathForResource:@"logo" ofType:@"html"];
+    NSData *htmlData = [[NSData alloc] initWithContentsOfFile:htmlPath];
+    NSData *logoData = [[NSData alloc] initWithContentsOfFile:logoPath];
+    NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    NSString *logo = [[NSString alloc] initWithData:logoData encoding:NSUTF8StringEncoding];
+    NSString *finalHtml = [NSString stringWithFormat:@"%@%@",html,logo];
+    // image
+    if (finalHtml.length && [finalHtml rangeOfString:YumiMobileImageUrlConstant].location != NSNotFound && self.ad.imageUrl.length) {
+        finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobileImageUrlConstant withString:self.ad.imageUrl];
+    }
+    // title
+    if (finalHtml.length && [finalHtml rangeOfString:YumiMobileTitleConstant].location != NSNotFound && self.ad.title.length) {
+        finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobileTitleConstant withString:self.ad.title];
+    }
+    // target url
+    if (finalHtml.length && [finalHtml rangeOfString:YumiMobiletargetUrlConstant].location != NSNotFound && self.ad.targetUrl.length) {
+        finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobiletargetUrlConstant withString:self.ad.targetUrl];
+    }
+    // desc
+    if (finalHtml.length && [finalHtml rangeOfString:YumiMobileDescConstant].location != NSNotFound && self.ad.desc.length) {
+        finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobileDescConstant withString:self.ad.desc];
+    }
+    // logo url
+    if (finalHtml.length && [finalHtml rangeOfString:YumiMobiletargetUrlConstant].location != NSNotFound && self.ad.logoUrl.length) {
+        finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobiletargetUrlConstant withString:self.ad.logoUrl];
+    }
+    // html
+    if (self.ad.materailType == 4) {
+        finalHtml = self.ad.html;
+    }
+    [self.web loadHTMLString:finalHtml baseURL:nil];
+}
+
+- (void)errorHandler:(NSError *)error {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(yumiMobileBanner:didFailToReceivAdWithError:)]) {
+        [self.delegate yumiMobileBanner:self didFailToReceivAdWithError:error];
+    }
 }
 
 #pragma mark - WKNavigationDelegate
