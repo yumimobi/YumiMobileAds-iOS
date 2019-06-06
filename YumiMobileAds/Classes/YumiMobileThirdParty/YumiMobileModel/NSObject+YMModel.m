@@ -997,7 +997,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model, __unsafe_unre
                                             cls = meta->_genericCls; // for xcode code coverage
                                     }
                                     NSObject *newOne = [cls new];
-                                    [newOne pa_modelSetWithDictionary:one];
+                                    [newOne ym_modelSetWithDictionary:one];
                                     if (newOne)
                                         [objectArr addObject:newOne];
                                 }
@@ -1039,7 +1039,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model, __unsafe_unre
                                             cls = meta->_genericCls; // for xcode code coverage
                                     }
                                     NSObject *newOne = [cls new];
-                                    [newOne pa_modelSetWithDictionary:(id)oneValue];
+                                    [newOne ym_modelSetWithDictionary:(id)oneValue];
                                     if (newOne)
                                         dic[oneKey] = newOne;
                                 }
@@ -1077,7 +1077,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model, __unsafe_unre
                                         cls = meta->_genericCls; // for xcode code coverage
                                 }
                                 NSObject *newOne = [cls new];
-                                [newOne pa_modelSetWithDictionary:one];
+                                [newOne ym_modelSetWithDictionary:one];
                                 if (newOne)
                                     [set addObject:newOne];
                             }
@@ -1111,7 +1111,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model, __unsafe_unre
                         one = ((id(*)(id, SEL))(void *)objc_msgSend)((id)model, meta->_getter);
                     }
                     if (one) {
-                        [one pa_modelSetWithDictionary:value];
+                        [one ym_modelSetWithDictionary:value];
                     } else {
                         Class cls = meta->_cls;
                         if (meta->_hasCustomClassFromDictionary) {
@@ -1120,7 +1120,7 @@ static void ModelSetValueForProperty(__unsafe_unretained id model, __unsafe_unre
                                 cls = meta->_genericCls; // for xcode code coverage
                         }
                         one = [cls new];
-                        [one pa_modelSetWithDictionary:value];
+                        [one ym_modelSetWithDictionary:value];
                         ((void (*)(id, SEL, id))(void *)objc_msgSend)((id)model, meta->_setter, (id)one);
                     }
                 }
@@ -1568,7 +1568,7 @@ static NSString *ModelDescription(NSObject *model) {
 
 @implementation NSObject (YMModel)
 
-+ (NSDictionary *)_pa_dictionaryWithJSON:(id)json {
++ (NSDictionary *)_ym_dictionaryWithJSON:(id)json {
     if (!json || json == (id)kCFNull)
         return nil;
     NSDictionary *dic = nil;
@@ -1588,12 +1588,12 @@ static NSString *ModelDescription(NSObject *model) {
     return dic;
 }
 
-+ (instancetype)pa_modelWithJSON:(id)json {
-    NSDictionary *dic = [self _pa_dictionaryWithJSON:json];
-    return [self pa_modelWithDictionary:dic];
++ (instancetype)ym_modelWithJSON:(id)json {
+    NSDictionary *dic = [self _ym_dictionaryWithJSON:json];
+    return [self ym_modelWithDictionary:dic];
 }
 
-+ (instancetype)pa_modelWithDictionary:(NSDictionary *)dictionary {
++ (instancetype)ym_modelWithDictionary:(NSDictionary *)dictionary {
     if (!dictionary || dictionary == (id)kCFNull)
         return nil;
     if (![dictionary isKindOfClass:[NSDictionary class]])
@@ -1606,17 +1606,17 @@ static NSString *ModelDescription(NSObject *model) {
     }
 
     NSObject *one = [cls new];
-    if ([one pa_modelSetWithDictionary:dictionary])
+    if ([one ym_modelSetWithDictionary:dictionary])
         return one;
     return nil;
 }
 
-- (BOOL)pa_modelSetWithJSON:(id)json {
-    NSDictionary *dic = [NSObject _pa_dictionaryWithJSON:json];
-    return [self pa_modelSetWithDictionary:dic];
+- (BOOL)ym_modelSetWithJSON:(id)json {
+    NSDictionary *dic = [NSObject _ym_dictionaryWithJSON:json];
+    return [self ym_modelSetWithDictionary:dic];
 }
 
-- (BOOL)pa_modelSetWithDictionary:(NSDictionary *)dic {
+- (BOOL)ym_modelSetWithDictionary:(NSDictionary *)dic {
     if (!dic || dic == (id)kCFNull)
         return NO;
     if (![dic isKindOfClass:[NSDictionary class]])
@@ -1660,7 +1660,7 @@ static NSString *ModelDescription(NSObject *model) {
     return YES;
 }
 
-- (id)pa_modelToJSONObject {
+- (id)ym_modelToJSONObject {
     /*
      Apple said:
      The top level object is an NSArray or NSDictionary.
@@ -1676,21 +1676,21 @@ static NSString *ModelDescription(NSObject *model) {
     return nil;
 }
 
-- (NSData *)pa_modelToJSONData {
-    id jsonObject = [self pa_modelToJSONObject];
+- (NSData *)ym_modelToJSONData {
+    id jsonObject = [self ym_modelToJSONObject];
     if (!jsonObject)
         return nil;
     return [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:NULL];
 }
 
-- (NSString *)pa_modelToJSONString {
-    NSData *jsonData = [self pa_modelToJSONData];
+- (NSString *)ym_modelToJSONString {
+    NSData *jsonData = [self ym_modelToJSONData];
     if (jsonData.length == 0)
         return nil;
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
-- (id)pa_modelCopy {
+- (id)ym_modelCopy {
     if (self == (id)kCFNull)
         return self;
     _YMModelMeta *modelMeta = [_YMModelMeta metaWithClass:self.class];
@@ -1775,7 +1775,7 @@ static NSString *ModelDescription(NSObject *model) {
     return one;
 }
 
-- (void)pa_modelEncodeWithCoder:(NSCoder *)aCoder {
+- (void)ym_modelEncodeWithCoder:(NSCoder *)aCoder {
     if (!aCoder)
         return;
     if (self == (id)kCFNull) {
@@ -1836,7 +1836,7 @@ static NSString *ModelDescription(NSObject *model) {
     }
 }
 
-- (id)pa_modelInitWithCoder:(NSCoder *)aDecoder {
+- (id)ym_modelInitWithCoder:(NSCoder *)aDecoder {
     if (!aDecoder)
         return self;
     if (self == (id)kCFNull)
@@ -1889,7 +1889,7 @@ static NSString *ModelDescription(NSObject *model) {
     return self;
 }
 
-- (NSUInteger)pa_modelHash {
+- (NSUInteger)ym_modelHash {
     if (self == (id)kCFNull)
         return [self hash];
     _YMModelMeta *modelMeta = [_YMModelMeta metaWithClass:self.class];
@@ -1909,7 +1909,7 @@ static NSString *ModelDescription(NSObject *model) {
     return value;
 }
 
-- (BOOL)pa_modelIsEqual:(id)model {
+- (BOOL)ym_modelIsEqual:(id)model {
     if (self == model)
         return YES;
     if (![model isMemberOfClass:self.class])
@@ -1935,7 +1935,7 @@ static NSString *ModelDescription(NSObject *model) {
     return YES;
 }
 
-- (NSString *)pa_modelDescription {
+- (NSString *)ym_modelDescription {
     return ModelDescription(self);
 }
 
@@ -1943,7 +1943,7 @@ static NSString *ModelDescription(NSObject *model) {
 
 @implementation NSArray (YMModel)
 
-+ (NSArray *)pa_modelArrayWithClass:(Class)cls json:(id)json {
++ (NSArray *)ym_modelArrayWithClass:(Class)cls json:(id)json {
     if (!json)
         return nil;
     NSArray *arr = nil;
@@ -1960,17 +1960,17 @@ static NSString *ModelDescription(NSObject *model) {
         if (![arr isKindOfClass:[NSArray class]])
             arr = nil;
     }
-    return [self pa_modelArrayWithClass:cls array:arr];
+    return [self ym_modelArrayWithClass:cls array:arr];
 }
 
-+ (NSArray *)pa_modelArrayWithClass:(Class)cls array:(NSArray *)arr {
++ (NSArray *)ym_modelArrayWithClass:(Class)cls array:(NSArray *)arr {
     if (!cls || !arr)
         return nil;
     NSMutableArray *result = [NSMutableArray new];
     for (NSDictionary *dic in arr) {
         if (![dic isKindOfClass:[NSDictionary class]])
             continue;
-        NSObject *obj = [cls pa_modelWithDictionary:dic];
+        NSObject *obj = [cls ym_modelWithDictionary:dic];
         if (obj)
             [result addObject:obj];
     }
@@ -1981,7 +1981,7 @@ static NSString *ModelDescription(NSObject *model) {
 
 @implementation NSDictionary (YMModel)
 
-+ (NSDictionary *)pa_modelDictionaryWithClass:(Class)cls json:(id)json {
++ (NSDictionary *)ym_modelDictionaryWithClass:(Class)cls json:(id)json {
     if (!json)
         return nil;
     NSDictionary *dic = nil;
@@ -1998,17 +1998,17 @@ static NSString *ModelDescription(NSObject *model) {
         if (![dic isKindOfClass:[NSDictionary class]])
             dic = nil;
     }
-    return [self pa_modelDictionaryWithClass:cls dictionary:dic];
+    return [self ym_modelDictionaryWithClass:cls dictionary:dic];
 }
 
-+ (NSDictionary *)pa_modelDictionaryWithClass:(Class)cls dictionary:(NSDictionary *)dic {
++ (NSDictionary *)ym_modelDictionaryWithClass:(Class)cls dictionary:(NSDictionary *)dic {
     if (!cls || !dic)
         return nil;
     NSMutableDictionary *result = [NSMutableDictionary new];
     for (NSString *key in dic.allKeys) {
         if (![key isKindOfClass:[NSString class]])
             continue;
-        NSObject *obj = [cls pa_modelWithDictionary:dic[key]];
+        NSObject *obj = [cls ym_modelWithDictionary:dic[key]];
         if (obj)
             result[key] = obj;
     }
