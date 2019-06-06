@@ -63,22 +63,17 @@
 
 - (instancetype)init {
     self = [super init];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     [self startMonitoringNetworkReachabilityStatus];
-    
     [self updateIP];
-    
     __weak typeof(self) weakSelf = self;
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectZero];
         weakSelf.userAgent = [web stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
     });
-    
     return self;
 }
 
