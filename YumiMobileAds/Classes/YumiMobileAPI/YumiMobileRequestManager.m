@@ -10,10 +10,12 @@
 #import "YumiMobileRequestModel.h"
 #import "YumiMobileResponseModel.h"
 #import "YMModel.h"
+#import "YumiMobileTools.h"
+
+#define yumiMobileRequestURL @"https://bid.adx.yumimobi.com/adx"
 
 @interface YumiMobileRequestManager ()
-@property (nonatomic) YMHTTPSessionManager *client;
-@property (nonatomic) NSString *ua;
+@property (nonatomic) YMURLSessionManager *client;
 
 @end
 
@@ -28,25 +30,41 @@
     return sharedManager;
 }
 
-- (YMHTTPSessionManager *)client {
+- (YMURLSessionManager *)client {
     if (!_client) {
-        _client = [YMHTTPSessionManager manager];
-        _client.requestSerializer.timeoutInterval = 15;
-        _client.responseSerializer = [YMJSONResponseSerializer serializer];
+        _client = [[YMURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     }
-    
-    [_client.requestSerializer setValue:self.ua forHTTPHeaderField:@"User-Agent"];
     return _client;
 }
 
 - (void)requestAdWithRequestModel:(YumiMobileRequestModel *)model
-                               ua:(NSString *)ua
                           success:(void (^)(YumiMobileResponseModel *ad))success
                           failure:(void (^)(NSError *error))failure {
-    self.ua = ua;
-    YMHTTPSessionManager *client = self.client;
+    NSMutableURLRequest *request = [[YMHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:yumiMobileRequestURL parameters:nil error:nil];
+    [request setValue:[YumiMobileTools sharedTool].userAgent forHTTPHeaderField:@"User-Agent"];
+    [request setValue:[YumiMobileTools sharedTool].ip forHTTPHeaderField:@"X-Forwarded-For"];
     
-    NSString *parameters = [model ym_modelToJSONObject];
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[model ym_modelToJSONObject] options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    [request setHTTPBody:jsonData];
+    YMHTTPResponseSerializer *responseSerializer = [YMJSONResponseSerializer serializer];
+    responseSerializer.acceptableContentTypes =
+    [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", @"text/plain", nil];
+    self.client.responseSerializer = responseSerializer;
     
+    [[self.client dataTaskWithRequest:request
+                       uploadProgress:nil
+                     downloadProgress:nil
+                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                        if (error || !responseObject) {
+                            failure(error);
+                            return;
+                        }
+                        if (responseObject[]) {
+                            
+                        }
+                        NSLog(@"%@,%@",response,responseObject);
+                    }] resume];
 }
 @end

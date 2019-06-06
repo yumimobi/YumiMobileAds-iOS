@@ -17,17 +17,14 @@
 @property (nonatomic) NSString *model;
 @property (nonatomic) NSString *make;
 @property (nonatomic) NSString *connectionType;
-@property (nonatomic) NSString *carrier; // int
-@property (nonatomic) NSString *orientation; // int
+@property (nonatomic, assign) int carrier;
+@property (nonatomic, assign) int orientation;
 @property (nonatomic) NSString *idfa;
 @property (nonatomic) NSString *osType;
 @property (nonatomic) NSString *osVersion;
-@property (nonatomic) int screenW;
-@property (nonatomic) int screenH;
-@property (nonatomic) int adType;
-@property (nonatomic) NSString *placementID;
-@property (nonatomic) int adWidth;
-@property (nonatomic) int adHeight;
+@property (nonatomic, assign) int screenW;
+@property (nonatomic, assign) int screenH;
+@property (nonatomic) NSArray *ads;
 // 创意类型
 // 1.图片，2.图文，4.html,5.文本
 @property (nonatomic) NSArray *inventoryTypes;
@@ -51,19 +48,15 @@
     self.bundleID = tool.bundleID;
     self.model = tool.model;
     self.make = @"Apple";
-    self.connectionType = tool.networkStatus;
-    self.carrier = tool.carrierName;
-    self.orientation = tool.isInterfaceOrientationPortrait ? @"1" : @"3";
+    self.connectionType = @"wifi";
+    self.carrier = 1;
+    self.orientation = tool.isInterfaceOrientationPortrait ? 1 : 3;
     self.idfa = tool.idfa;
-    self.osType = @"iOS";
+    self.osType = @"ios";
     self.osVersion = tool.systemVersion;
     self.screenW = [UIScreen mainScreen].bounds.size.width;
     self.screenH = [UIScreen mainScreen].bounds.size.height;
-    self.adType = adType;
-    self.placementID = placementID;
-    self.adWidth = adSize.width;
-    self.adHeight = adSize.height;
-    self.inventoryTypes = @[@1,@2,@4,@5];
+    self.ads = @[@{@"type":@(adType),@"place_id":placementID,@"w":@(adSize.width),@"h":@(adSize.height),@"inventory_types":@[@1,@2,@4,@5]}];
     return self;
 }
 
@@ -80,13 +73,9 @@
              @"orientation" : @"device.orientation",
              @"idfa" : @"device.ios_adid",
              @"osType" : @"device.os_type",
+             @"osVersion" : @"device.os_version",
              @"screenW" : @"device.screen.w",
              @"screenH" : @"device.screen.h",
-             @"adType" : @"ads.type",
-             @"placementID" : @"ads.place_id",
-             @"adWidth" : @"ads.w",
-             @"adHeight" : @"ads.h",
-             @"inventoryTypes" : @"ads.inventory_types",
              };
 }
 
