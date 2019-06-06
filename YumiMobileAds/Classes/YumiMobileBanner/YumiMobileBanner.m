@@ -19,7 +19,6 @@
 @property (nonatomic, assign) CGSize adSize;
 
 @property (nonatomic) WKWebView *web;
-@property (nonatomic) NSString *ua;
 @end
 
 @implementation YumiMobileBanner
@@ -42,12 +41,7 @@
     if (bannerSize == kYumiMobileAdViewBanner728x90) {
         self.adSize = CGSizeMake(728, 90);
     }
-    // ua
-    self.web = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, self.adSize.width, self.adSize.height)];
-    __weak __typeof(self)weakSelf = self;
-    [self.web evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError *error) {
-        weakSelf.ua = result ?: @"";
-    }];
+    
     return self;
 }
 
@@ -72,11 +66,10 @@
     // request server
     [[YumiMobileRequestManager sharedManager]
      requestAdWithRequestModel:requestModel
-                            ua:self.ua
                        success:^(YumiMobileResponseModel * _Nonnull ad) {
-                           
+
                       }failure:^(NSError * _Nonnull error) {
-        
+
     }];
     
 }
