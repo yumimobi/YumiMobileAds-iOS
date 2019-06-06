@@ -9,9 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @interface YumiMobileAdsModel : NSObject
-// 1，2 浏览器
-// 6，8 App Store
-// 7 deeplink
 @property (nonatomic, assign) int action;
 @property (nonatomic) NSString *targetUrl;
 @property (nonatomic) NSString *html;
