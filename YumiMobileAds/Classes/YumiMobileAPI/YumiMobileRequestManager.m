@@ -11,6 +11,7 @@
 #import "YumiMobileResponseModel.h"
 #import "YMModel.h"
 #import "YumiMobileTools.h"
+#import "YumiMobileConstants.h"
 
 #define yumiMobileRequestURL @"https://bid.adx.yumimobi.com/adx"
 
@@ -61,10 +62,15 @@
                             failure(error);
                             return;
                         }
-                        if (responseObject[]) {
-                            
+                        YumiMobileResponseModel *responseModel = [YumiMobileResponseModel ym_modelWithJSON:responseObject];
+                        if (responseModel.ads && responseModel.result == 0) {
+                            success(responseModel);
+                            return;
+                        } else {
+                            NSError *error = [[NSError alloc] initWithDomain:YumiMobileErrorDomin code:204 userInfo:@{@"NSLocalizedDescriptionKey":responseModel.msg}];
+                            failure(error);
                         }
-                        NSLog(@"%@,%@",response,responseObject);
+                        
                     }] resume];
 }
 @end
