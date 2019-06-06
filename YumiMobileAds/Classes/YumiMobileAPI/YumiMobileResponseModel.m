@@ -8,29 +8,31 @@
 #import "YumiMobileResponseModel.h"
 #import "YMModel.h"
 
-@implementation YumiMobileAds
+@implementation YumiMobileAdsModel
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{
              @"html" : @"html_snippet",
              @"imageUrl" : @"image_url",
              @"targetUrl" : @"target_url",
              @"materailType" : @"inventory_type",
+             @"clickArray" : @"click_trackers",
+             @"impressionArray" : @"imp_trackers",
+             @"closeArray" : @"close_trackers"
              };
 }
 
 - (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
-    self.clickArray = dic[@"click_trackers"];
-    self.impressionArray = dic[@"imp_trackers"];
-    self.closeArray = dic[@"close_trackers"];
     return YES;
 }
 
+- (NSString *)description {
+    return [self ym_modelDescription];
+}
 @end
 
 @implementation YumiMobileResponseModel
-- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
-    self.ads = dic[@"ads"][0];
-    return YES;
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"ads" : [YumiMobileAdsModel class]};
 }
 
 - (NSString *)description {

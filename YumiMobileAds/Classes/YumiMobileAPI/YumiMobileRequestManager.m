@@ -63,7 +63,7 @@
                             return;
                         }
                         YumiMobileResponseModel *responseModel = [YumiMobileResponseModel ym_modelWithJSON:responseObject];
-                        if (responseModel.ads && responseModel.result == 0) {
+                        if (responseModel.ads.count && responseModel.result == 0) {
                             success(responseModel);
                             return;
                         } else {
