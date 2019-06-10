@@ -21,12 +21,18 @@
 
 @implementation YumiMobileAppStore
 
-- (instancetype)initWithItunesLink:(NSString *)linkUrl {
-    self = [super init];
++ (instancetype)sharedYumiMobileAppStore {
+    static YumiMobileAppStore *_instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[self alloc] init];
+    });
+    return _instance;
+}
 
+- (void)setItunesLink:(NSString *)linkUrl {
     self.iTunesLink = linkUrl;
     [self preloadStoreProductView];
-    return self;
 }
 
 - (void)present {
@@ -48,6 +54,7 @@
     }
     self.appStore = [[SKStoreProductViewController alloc] init];
     self.appStore.delegate = self;
+    iTunesID = @"1375714588";
     NSDictionary *parameters = @{SKStoreProductParameterITunesItemIdentifier : iTunesID};
     __weak typeof(self) weakSelf = self;
     self.appStoreLoaded = NO;
