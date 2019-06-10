@@ -29,7 +29,6 @@
 
 @property (nonatomic) WKWebView *web;
 @property (nonatomic) YumiMobileAdsModel *ad;
-@property (nonatomic) YumiMobileAppStore *appStore;
 @end
 
 @implementation YumiMobileBanner
@@ -92,7 +91,7 @@
 
 - (void)setUpBannerMaterial {
     if (self.ad.targetUrl.length) {
-        self.appStore = [[YumiMobileAppStore alloc] initWithItunesLink:self.ad.targetUrl];
+        [[YumiMobileAppStore sharedYumiMobileAppStore] setItunesLink:self.ad.targetUrl];
     }
     NSString *resourceName = @"";
     // image
@@ -156,7 +155,7 @@
         [tool openBySystemMethod:url];
     }
     if (self.ad.action == 6 || self.ad.action == 8) {
-        [self.appStore present];
+        [[YumiMobileAppStore sharedYumiMobileAppStore] present];
     }
     if (self.ad.action == 7) {
         [tool openBySystemMethod:url];
