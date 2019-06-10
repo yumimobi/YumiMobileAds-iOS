@@ -43,11 +43,11 @@ NS_ASSUME_NONNULL_BEGIN
 
      int main() {
          // create model from json
-         YMBook *book = [YMBook pa_modelWithJSON:@"{\"name\": \"Harry Potter\", \"pages\": 256, \"author\":
+         YMBook *book = [YMBook ym_modelWithJSON:@"{\"name\": \"Harry Potter\", \"pages\": 256, \"author\":
  {\"name\": \"J.K.Rowling\", \"birthday\": \"1965-07-31\" }}"];
 
          // convert model to json
-         NSString *json = [book pa_modelToJSONString];
+         NSString *json = [book ym_modelToJSONString];
          // {"author":{"name":"J.K.Rowling","birthday":"1965-07-31T00:00:00+0000"},"name":"Harry Potter","pages":256}
      }
 
@@ -58,11 +58,11 @@ NS_ASSUME_NONNULL_BEGIN
      @end
 
      @implementation YMShadow
-     - (void)encodeWithCoder:(NSCoder *)aCoder { [self pa_modelEncodeWithCoder:aCoder]; }
-     - (id)initWithCoder:(NSCoder *)aDecoder { self = [super init]; return [self pa_modelInitWithCoder:aDecoder]; }
-     - (id)copyWithZone:(NSZone *)zone { return [self pa_modelCopy]; }
-     - (NSUInteger)hash { return [self pa_modelHash]; }
-     - (BOOL)isEqual:(id)object { return [self pa_modelIsEqual:object]; }
+     - (void)encodeWithCoder:(NSCoder *)aCoder { [self ym_modelEncodeWithCoder:aCoder]; }
+     - (id)initWithCoder:(NSCoder *)aDecoder { self = [super init]; return [self ym_modelInitWithCoder:aDecoder]; }
+     - (id)copyWithZone:(NSZone *)zone { return [self ym_modelCopy]; }
+     - (NSUInteger)hash { return [self ym_modelHash]; }
+     - (BOOL)isEqual:(id)object { return [self ym_modelIsEqual:object]; }
      @end
 
  */
@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return A new instance created from the json, or nil if an error occurs.
  */
-+ (nullable instancetype)pa_modelWithJSON:(id)json;
++ (nullable instancetype)ym_modelWithJSON:(id)json;
 
 /**
  Creates and returns a new instance of the receiver from a key-value dictionary.
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
      `NSValue` -> struct or union, such as CGRect, CGSize, ...
      `NSString` -> SEL, Class.
  */
-+ (nullable instancetype)pa_modelWithDictionary:(NSDictionary *)dictionary;
++ (nullable instancetype)ym_modelWithDictionary:(NSDictionary *)dictionary;
 
 /**
  Set the receiver's properties with a json object.
@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return Whether succeed.
  */
-- (BOOL)pa_modelSetWithJSON:(id)json;
+- (BOOL)ym_modelSetWithJSON:(id)json;
 
 /**
  Set the receiver's properties with a key-value dictionary.
@@ -129,7 +129,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return Whether succeed.
  */
-- (BOOL)pa_modelSetWithDictionary:(NSDictionary *)dic;
+- (BOOL)ym_modelSetWithDictionary:(NSDictionary *)dic;
 
 /**
  Generate a json object from the receiver's properties.
@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
  If the reciver is `NSArray`, `NSDictionary` or `NSSet`, it just convert
  the inner object to json object.
  */
-- (nullable id)pa_modelToJSONObject;
+- (nullable id)ym_modelToJSONObject;
 
 /**
  Generate a json string's data from the receiver's properties.
@@ -152,7 +152,7 @@ NS_ASSUME_NONNULL_BEGIN
  If the reciver is `NSArray`, `NSDictionary` or `NSSet`, it will also convert the
  inner object to json string.
  */
-- (nullable NSData *)pa_modelToJSONData;
+- (nullable NSData *)ym_modelToJSONData;
 
 /**
  Generate a json string from the receiver's properties.
@@ -163,21 +163,21 @@ NS_ASSUME_NONNULL_BEGIN
  If the reciver is `NSArray`, `NSDictionary` or `NSSet`, it will also convert the
  inner object to json string.
  */
-- (nullable NSString *)pa_modelToJSONString;
+- (nullable NSString *)ym_modelToJSONString;
 
 /**
  Copy a instance with the receiver's properties.
 
  @return A copied instance, or nil if an error occurs.
  */
-- (nullable id)pa_modelCopy;
+- (nullable id)ym_modelCopy;
 
 /**
  Encode the receiver's properties to a coder.
 
  @param aCoder  An archiver object.
  */
-- (void)pa_modelEncodeWithCoder:(NSCoder *)aCoder;
+- (void)ym_modelEncodeWithCoder:(NSCoder *)aCoder;
 
 /**
  Decode the receiver's properties from a decoder.
@@ -186,14 +186,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return self
  */
-- (id)pa_modelInitWithCoder:(NSCoder *)aDecoder;
+- (id)ym_modelInitWithCoder:(NSCoder *)aDecoder;
 
 /**
  Get a hash code with the receiver's properties.
 
  @return Hash code.
  */
-- (NSUInteger)pa_modelHash;
+- (NSUInteger)ym_modelHash;
 
 /**
  Compares the receiver with another object for equality, based on properties.
@@ -202,14 +202,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return `YES` if the reciever is equal to the object, otherwise `NO`.
  */
-- (BOOL)pa_modelIsEqual:(id)model;
+- (BOOL)ym_modelIsEqual:(id)model;
 
 /**
  Description method for debugging purposes based on properties.
 
  @return A string that describes the contents of the receiver.
  */
-- (NSString *)pa_modelDescription;
+- (NSString *)ym_modelDescription;
 
 @end
 
@@ -228,7 +228,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return A array, or nil if an error occurs.
  */
-+ (nullable NSArray *)pa_modelArrayWithClass:(Class)cls json:(id)json;
++ (nullable NSArray *)ym_modelArrayWithClass:(Class)cls json:(id)json;
 
 @end
 
@@ -247,7 +247,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return A dictionary, or nil if an error occurs.
  */
-+ (nullable NSDictionary *)pa_modelDictionaryWithClass:(Class)cls json:(id)json;
++ (nullable NSDictionary *)ym_modelDictionaryWithClass:(Class)cls json:(id)json;
 @end
 
 /**

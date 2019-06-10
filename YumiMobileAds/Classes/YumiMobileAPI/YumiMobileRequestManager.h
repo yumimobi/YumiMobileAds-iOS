@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YumiMobileRequestManager : NSObject
 + (instancetype)sharedManager;
 - (void)requestAdWithRequestModel:(YumiMobileRequestModel *)model
-                               ua:(NSString *)ua
                           success:(void (^)(YumiMobileResponseModel *ad))success
                           failure:(void (^)(NSError *error))failure;
 @end
