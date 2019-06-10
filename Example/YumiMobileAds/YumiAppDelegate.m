@@ -7,12 +7,18 @@
 //
 
 #import "YumiAppDelegate.h"
+#import "MoPub.h"
 
 @implementation YumiAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:@"fbd076b7ac6d4cd78e37fa62ff5dbc11"];
+    
+    sdkConfig.loggingLevel = MPBLogLevelInfo;
+    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
+        NSLog(@"SDK initialization complete");
+    }];
     return YES;
 }
 

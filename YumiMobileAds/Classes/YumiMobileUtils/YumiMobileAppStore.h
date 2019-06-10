@@ -10,7 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YumiMobileAppStore : NSObject
-- (instancetype)initWithItunesLink:(NSString *)linkUrl;
++ (instancetype)sharedYumiMobileAppStore;
+- (void)setItunesLink:(NSString *)linkUrl;
 - (void)present;
 
 @end

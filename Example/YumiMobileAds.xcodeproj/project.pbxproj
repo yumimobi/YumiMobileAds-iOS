@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		39BA32102FF0AF8B9FC7FC20 /* Pods_YumiMobileAds_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9E14788E955C123C4F722D0 /* Pods_YumiMobileAds_Example.framework */; };
+		5BF43EA922AE38C20042C32E /* MPYumiMobileBannerCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF43EA822AE38C20042C32E /* MPYumiMobileBannerCustomEvent.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 		2B2293030D0034D9197956AA /* Pods-YumiMobileAds_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumiMobileAds_Example.release.xcconfig"; path = "Target Support Files/Pods-YumiMobileAds_Example/Pods-YumiMobileAds_Example.release.xcconfig"; sourceTree = "<group>"; };
 		2F085F43E0AF30F46D73D1C0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		32CA7BD0D2ECA0760D5C3C09 /* Pods_YumiMobileAds_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumiMobileAds_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BF43EA722AE38C20042C32E /* MPYumiMobileBannerCustomEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPYumiMobileBannerCustomEvent.h; sourceTree = "<group>"; };
+		5BF43EA822AE38C20042C32E /* MPYumiMobileBannerCustomEvent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPYumiMobileBannerCustomEvent.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* YumiMobileAds_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumiMobileAds_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,6 +140,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* YumiViewController.h */,
 				6003F5A6195388D20070C39A /* YumiViewController.m */,
+				5BF43EA722AE38C20042C32E /* MPYumiMobileBannerCustomEvent.h */,
+				5BF43EA822AE38C20042C32E /* MPYumiMobileBannerCustomEvent.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -328,10 +333,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-YumiMobileAds_Example/Pods-YumiMobileAds_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/YumiMobileAds/YumiMobileAds.framework",
+				"${BUILT_PRODUCTS_DIR}/mopub-ios-sdk/MoPub.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YumiMobileAds.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MoPub.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -369,6 +376,7 @@
 			files = (
 				6003F59E195388D20070C39A /* YumiAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* YumiViewController.m in Sources */,
+				5BF43EA922AE38C20042C32E /* MPYumiMobileBannerCustomEvent.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
