@@ -17,6 +17,7 @@
 
 @interface YumiMobileRequestManager ()
 @property (nonatomic) YMURLSessionManager *client;
+@property (nonatomic) YMHTTPSessionManager *reportClient;
 
 @end
 
@@ -36,6 +37,17 @@
         _client = [[YMURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     }
     return _client;
+}
+
+- (YMHTTPSessionManager *)reportClient {
+    if (!_reportClient) {
+        _reportClient = [YMHTTPSessionManager manager];
+        _reportClient.requestSerializer.timeoutInterval = 15;
+        _reportClient.responseSerializer = [YMHTTPResponseSerializer serializer];
+    }
+    
+    [_reportClient.requestSerializer setValue:[YumiMobileTools sharedTool].userAgent forHTTPHeaderField:@"User-Agent"];
+    return _reportClient;
 }
 
 - (void)requestAdWithRequestModel:(YumiMobileRequestModel *)model
@@ -72,5 +84,59 @@
                         }
                         
                     }] resume];
+}
+
+- (void)sendTrackerUrl:(NSArray<NSString *> *)trackerUrls
+            clickPoint:(CGPoint)clickPoint {
+    CGFloat x = 999;
+    CGFloat y = 999;
+    if (clickPoint.x || clickPoint.y) {
+        x = clickPoint.x;
+        y = clickPoint.y;
+    }
+    NSString *timeStamp = [[YumiMobileTools sharedTool] timestamp];
+    NSDictionary *replaceStr = @{
+                                 @"YUMI_ADSERVICE_CLICK_DOWN_X" : @(x),
+                                 @"YUMI_ADSERVICE_CLICK_DOWN_Y" : @(y),
+                                 @"YUMI_ADSERVICE_CLICK_UP_X" : @(x),
+                                 @"YUMI_ADSERVICE_CLICK_UP_Y" : @(y),
+                                 @"YUMI_ADSERVICE_UNIX_ORIGIN_TIME" : timeStamp,
+                                 };
+    for (int i = 0; i < trackerUrls.count; i++) {
+        __block NSString *serUrl = [trackerUrls objectAtIndex:i];
+        if (![serUrl isKindOfClass:[NSNull class]] && serUrl) {
+            [replaceStr enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
+                serUrl =
+                [serUrl stringByReplacingOccurrencesOfString:key withString:[NSString stringWithFormat:@"%@", obj]];
+            }];
+            [self sendToThirdParty:serUrl withMaxRetries:5 attempts:0];
+        }
+    }
+}
+
+- (void)sendToThirdParty:(NSString *)trackerUrl
+          withMaxRetries:(int)maxRetries
+                attempts:(int)attempts {
+    __weak typeof(self) weakSelf = self;
+    void (^retryIfNeeded)(NSError *) = ^(NSError *error) {
+        if (attempts > maxRetries) {
+            return;
+        }
+        dispatch_after(
+                       dispatch_time(DISPATCH_TIME_NOW, (int64_t)(NSEC_PER_SEC * 1 << attempts)),
+                       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                           [weakSelf sendToThirdParty:trackerUrl withMaxRetries:maxRetries attempts:attempts + 1];
+                       });
+    };
+    if (![NSURL URLWithString:trackerUrl]) {
+        return;
+    }
+    [self.reportClient GET:trackerUrl
+                parameters:nil
+                  progress:nil
+                   success:nil
+                   failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+                       retryIfNeeded(error);
+                   }];
 }
 @end
