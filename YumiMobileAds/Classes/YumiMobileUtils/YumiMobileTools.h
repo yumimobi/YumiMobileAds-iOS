@@ -63,5 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isiPhoneXR;
 - (UIViewController *)topMostController;
 - (BOOL)iSSimplifiedChinese;
+- (NSString *)timestamp;
 @end
 NS_ASSUME_NONNULL_END
