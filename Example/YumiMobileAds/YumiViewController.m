@@ -31,7 +31,7 @@
     CGFloat buttonWidth = 150;
     CGFloat buttonHeight = 50;
     self.requestBanner = [[UIButton alloc] initWithFrame:CGRectMake((screenWidth - buttonWidth)/2, 50, buttonWidth, buttonHeight)];
-    [self.requestBanner addTarget:self action:@selector(requestAd) forControlEvents:UIControlEventTouchDown];
+    [self.requestBanner addTarget:self action:@selector(requestAd) forControlEvents:UIControlEventTouchUpInside];
     self.requestBanner.backgroundColor = [UIColor blackColor];
     self.requestBanner.layer.cornerRadius = 10;
     self.requestBanner.layer.masksToBounds = YES;
