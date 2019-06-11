@@ -492,4 +492,14 @@
     NSTimeInterval a = [dat timeIntervalSince1970] * 1000;
     return [NSString stringWithFormat:@"%f", a];
 }
+
+- (CGFloat)adaptedValue6:(CGFloat)size {
+    if ([self isiPad]) {
+        return 1.5 * size;
+    }
+    if ([self isInterfaceOrientationPortrait]) {
+        return round((size) * (kSCREEN_WIDTH / 375.0f));
+    }
+    return round((size) * (kSCREEN_HEIGHT / 375.0f));
+}
 @end
