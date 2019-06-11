@@ -56,6 +56,10 @@
     self.backgroundColor = [UIColor blackColor];
     self.web = [[WKWebView alloc] initWithFrame:self.frame];
     self.web.navigationDelegate = self;
+    self.web.scrollView.scrollEnabled = NO;
+    if (@available(iOS 11, *)) {
+        [self.web.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+    }
     // add click event
     UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureClick:)];
     tapG.delegate = self;
@@ -67,7 +71,6 @@
 }
 
 - (void)tapGestureClick:(UITapGestureRecognizer *)grconizer {
-    
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
@@ -128,6 +131,10 @@
     NSData *htmlData = [[NSData alloc] initWithContentsOfFile:htmlPath];
     NSData *logoData = [[NSData alloc] initWithContentsOfFile:logoPath];
     NSString *html = [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+    // html
+    if (self.ad.materailType == 4) {
+        html = self.ad.html;
+    }
     NSString *logo = [[NSString alloc] initWithData:logoData encoding:NSUTF8StringEncoding];
     NSString *finalHtml = [NSString stringWithFormat:@"%@%@",html,logo];
     // image
@@ -149,10 +156,6 @@
     // logo url
     if (finalHtml.length && [finalHtml rangeOfString:YumiMobiletargetUrlConstant].location != NSNotFound && self.ad.logoUrl.length) {
         finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobiletargetUrlConstant withString:self.ad.logoUrl];
-    }
-    // html
-    if (self.ad.materailType == 4) {
-        finalHtml = self.ad.html;
     }
     [self.web loadHTMLString:finalHtml baseURL:nil];
 }
