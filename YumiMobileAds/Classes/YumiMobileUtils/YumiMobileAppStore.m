@@ -54,7 +54,6 @@
     }
     self.appStore = [[SKStoreProductViewController alloc] init];
     self.appStore.delegate = self;
-    iTunesID = @"1375714588";
     NSDictionary *parameters = @{SKStoreProductParameterITunesItemIdentifier : iTunesID};
     __weak typeof(self) weakSelf = self;
     self.appStoreLoaded = NO;
