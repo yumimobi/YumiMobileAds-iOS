@@ -48,7 +48,7 @@
     self.bundleID = tool.bundleID;
     self.model = tool.model;
     self.make = @"Apple";
-    self.connectionType = @"wifi";
+    self.connectionType = [@{@"2G" : @"2g", @"3G" : @"3g", @"4G" : @"4g", @"WIFI" : @"wifi",@"UNKNOW":@"cell_unknown"} objectForKey:tool.networkStatus] ?: @"wifi";
     self.carrier = 1;
     self.orientation = tool.isInterfaceOrientationPortrait ? 1 : 3;
     self.idfa = tool.idfa;
