@@ -18,7 +18,7 @@
 #define YumiMobileDescConstant @"##DESC##"
 #define YumiMobileLogoUrlConstant @"##YUMI_LOGO_URL##"
 
-@interface YumiMobileBanner ()<WKNavigationDelegate>
+@interface YumiMobileBanner ()<WKNavigationDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic) NSString *sspToken;
 @property (nonatomic) NSString *appID;
 @property (nonatomic) NSString *placementID;
@@ -29,6 +29,7 @@
 
 @property (nonatomic) WKWebView *web;
 @property (nonatomic) YumiMobileAdsModel *ad;
+@property (nonatomic) CGPoint point;
 @end
 
 @implementation YumiMobileBanner
@@ -55,9 +56,25 @@
     self.backgroundColor = [UIColor blackColor];
     self.web = [[WKWebView alloc] initWithFrame:self.frame];
     self.web.navigationDelegate = self;
+    // add click event
+    UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureClick:)];
+    tapG.delegate = self;
+    self.web.userInteractionEnabled = YES;
+    [self.web addGestureRecognizer:tapG];
     [self addSubview:self.web];
     
     return self;
+}
+
+- (void)tapGestureClick:(UITapGestureRecognizer *)grconizer {
+    
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    CGPoint p = [touch locationInView:self.web];
+    self.point = p;
+    return YES;
 }
 
 - (void)requestAd {
@@ -160,6 +177,8 @@
     if (self.ad.action == 7) {
         [tool openBySystemMethod:url];
     }
+    // report click
+    [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.clickArray clickPoint:self.point];
 }
 
 #pragma mark - WKNavigationDelegate
@@ -183,6 +202,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(yumiMobileBannerDidReceiveAd:)]) {
         [self.delegate yumiMobileBannerDidReceiveAd:self];
     }
+    [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.impressionArray clickPoint:self.point];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {

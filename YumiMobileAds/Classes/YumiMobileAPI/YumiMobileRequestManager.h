@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)requestAdWithRequestModel:(YumiMobileRequestModel *)model
                           success:(void (^)(YumiMobileResponseModel *ad))success
                           failure:(void (^)(NSError *error))failure;
+
+- (void)sendTrackerUrl:(NSArray<NSString *> *)trackerUrls
+            clickPoint:(CGPoint)clickPoint;
 @end
 
 NS_ASSUME_NONNULL_END

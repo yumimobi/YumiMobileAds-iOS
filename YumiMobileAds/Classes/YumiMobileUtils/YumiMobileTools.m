@@ -486,4 +486,10 @@
     
     return [self.language hasPrefix:@"zh-Hans"];
 }
+
+- (NSString *)timestamp {
+    NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a = [dat timeIntervalSince1970] * 1000;
+    return [NSString stringWithFormat:@"%f", a];
+}
 @end
