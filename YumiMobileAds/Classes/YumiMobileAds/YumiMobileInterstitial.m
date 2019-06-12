@@ -30,6 +30,7 @@
 @property (nonatomic) WKWebView *web;
 @property (nonatomic) YumiMobileAdsModel *ad;
 @property (nonatomic) CGPoint point;
+@property (nonatomic) YumiMobileAppStore *appStore;
 @end
 
 @implementation YumiMobileInterstitial
@@ -157,7 +158,7 @@
 
 - (void)setUpInterstitialMaterial {
     if (self.ad.targetUrl.length) {
-        [[YumiMobileAppStore sharedYumiMobileAppStore] setItunesLink:self.ad.targetUrl];
+        self.appStore = [[YumiMobileAppStore alloc] initWithItunesLink:self.ad.targetUrl];
     }
     NSString *resourceName = @"";
     // image
@@ -239,7 +240,7 @@
         [tool openBySystemMethod:url];
     }
     if (self.ad.action == 6 || self.ad.action == 8) {
-        [[YumiMobileAppStore sharedYumiMobileAppStore] present];
+        [self.appStore present];
     }
     if (self.ad.action == 7) {
         [tool openBySystemMethod:url];

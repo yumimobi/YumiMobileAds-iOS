@@ -9,7 +9,7 @@
 #import "YumiMobileRequestManager.h"
 #import "YumiMobileResponseModel.h"
 #import "YumiMobileTools.h"
-#import "YumiMobileAppStore.h"
+#import "YumiMobileBannerAppStore.h"
 #import <WebKit/WebKit.h>
 
 #define YumiMobileImageUrlConstant @"##IMG-SRC-URL##"
@@ -111,7 +111,7 @@
 
 - (void)setUpBannerMaterial {
     if (self.ad.targetUrl.length) {
-        [[YumiMobileAppStore sharedYumiMobileAppStore] setItunesLink:self.ad.targetUrl];
+        [[YumiMobileBannerAppStore sharedYumiMobileAppStore] setItunesLink:self.ad.targetUrl];
     }
     NSString *resourceName = @"";
     // image
@@ -175,7 +175,7 @@
         [tool openBySystemMethod:url];
     }
     if (self.ad.action == 6 || self.ad.action == 8) {
-        [[YumiMobileAppStore sharedYumiMobileAppStore] present];
+        [[YumiMobileBannerAppStore sharedYumiMobileAppStore] present];
     }
     if (self.ad.action == 7) {
         [tool openBySystemMethod:url];
