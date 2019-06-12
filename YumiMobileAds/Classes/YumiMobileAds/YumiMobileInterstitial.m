@@ -154,6 +154,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(yumiMobileInterstitialWillDisappear:)]) {
         [self.delegate yumiMobileInterstitialWillDisappear:self];
     }
+    [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.closeArray clickPoint:self.point];
 }
 
 - (void)setUpInterstitialMaterial {
