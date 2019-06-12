@@ -20,8 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
                                        appID:(NSString *)appID
                                  placementID:(NSString *)placementID
                                       adType:(YumiMobileAdType)adType
-                                      adSize:(CGSize)adSize
-                           gdprConsentStatus:(NSString *)consentStatus;
+                                      adSize:(CGSize)adSize;
 
 @end
 

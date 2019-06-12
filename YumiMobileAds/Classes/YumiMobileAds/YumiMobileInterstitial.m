@@ -90,8 +90,7 @@
      appID:self.appID
      placementID:self.placementID
      adType:kYumiMobileAdInterstitial
-     adSize:self.adSize
-     gdprConsentStatus:gdprConsentStatus];
+     adSize:self.adSize];
     __weak __typeof(self)weakSelf = self;
     // request server
     [[YumiMobileRequestManager sharedManager]

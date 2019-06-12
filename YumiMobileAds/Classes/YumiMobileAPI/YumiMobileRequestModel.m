@@ -7,6 +7,7 @@
 
 #import "YumiMobileRequestModel.h"
 #import "YumiMobileTools.h"
+#import "YumiMobileConfigurations.h"
 
 @interface YumiMobileRequestModel ()
 @property (nonatomic) NSString *protocolVersion;
@@ -28,6 +29,9 @@
 // 创意类型
 // 1.图片，2.图文，4.html,5.文本
 @property (nonatomic) NSArray *inventoryTypes;
+@property (nonatomic, assign) int gdpr;
+@property (nonatomic, assign) int coppa;
+@property (nonatomic) NSString *consent;
 
 @end
 
@@ -36,8 +40,7 @@
                                        appID:(NSString *)appID
                                  placementID:(NSString *)placementID
                                       adType:(YumiMobileAdType)adType
-                                      adSize:(CGSize)adSize
-                           gdprConsentStatus:(NSString *)consentStatus {
+                                      adSize:(CGSize)adSize {
     self = [super init];
     YumiMobileTools *tool = [YumiMobileTools sharedTool];
     
@@ -57,6 +60,9 @@
     self.screenW = [UIScreen mainScreen].bounds.size.width;
     self.screenH = [UIScreen mainScreen].bounds.size.height;
     self.ads = @[@{@"type":@(adType),@"place_id":placementID,@"w":@(adSize.width),@"h":@(adSize.height),@"inventory_types":@[@1,@2,@4,@5]}];
+    self.gdpr = [YumiMobileConfigurations sharedYumiMobileConfigurations].gdpr;
+    self.consent = [YumiMobileConfigurations sharedYumiMobileConfigurations].consent ? @"yes" : @"no";
+    self.coppa = [YumiMobileConfigurations sharedYumiMobileConfigurations].coppa;
     return self;
 }
 
@@ -76,6 +82,9 @@
              @"osVersion" : @"device.os_version",
              @"screenW" : @"device.screen.w",
              @"screenH" : @"device.screen.h",
+             @"gdpr" : @"regs.ext.gdpr",
+             @"consent" : @"user.ext.consent",
+             @"coppa" : @"regs.ext.coppa"
              };
 }
 
