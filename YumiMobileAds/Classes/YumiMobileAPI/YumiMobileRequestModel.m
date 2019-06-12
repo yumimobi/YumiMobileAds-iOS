@@ -84,7 +84,7 @@
              @"screenH" : @"device.screen.h",
              @"gdpr" : @"regs.ext.gdpr",
              @"consent" : @"user.ext.consent",
-             @"coppa" : @"regs.ext.coppa"
+             @"coppa" : @"regs.coppa"
              };
 }
 
