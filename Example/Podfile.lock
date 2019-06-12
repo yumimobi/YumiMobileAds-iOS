@@ -1,4 +1,12 @@
 PODS:
+  - AppCenter (2.0.1):
+    - AppCenter/Analytics (= 2.0.1)
+    - AppCenter/Crashes (= 2.0.1)
+  - AppCenter/Analytics (2.0.1):
+    - AppCenter/Core
+  - AppCenter/Core (2.0.1)
+  - AppCenter/Crashes (2.0.1):
+    - AppCenter/Core
   - mopub-ios-sdk (5.7.1):
     - mopub-ios-sdk/MoPubSDK (= 5.7.1)
   - mopub-ios-sdk/Avid (5.7.1):
@@ -13,11 +21,13 @@ PODS:
   - YumiMobileAds (0.1.0)
 
 DEPENDENCIES:
+  - AppCenter
   - mopub-ios-sdk
   - YumiMobileAds (from `../`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AppCenter
     - mopub-ios-sdk
 
 EXTERNAL SOURCES:
@@ -25,9 +35,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  AppCenter: 6a5ff2fd007b53431259fdd74f91eb3d0dfea3d1
   mopub-ios-sdk: b1167e8c86afaccd37d484828c4ad2c3c1656a32
   YumiMobileAds: 4c3e93f3a0afc6404043705c775fcbc915c927ad
 
-PODFILE CHECKSUM: 5af4b85e9455f55dd445b8d5069db653a8bb7ba8
+PODFILE CHECKSUM: a7de162a30d14fac8250dce26bf534d8a0a383fd
 
 COCOAPODS: 1.7.1
