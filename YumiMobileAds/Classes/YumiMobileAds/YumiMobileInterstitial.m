@@ -229,6 +229,7 @@
     if ([self.delegate respondsToSelector:@selector(yumiMobileInterstitialWillAppear:)]) {
         [self.delegate yumiMobileInterstitialWillAppear:self];
     }
+    [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.impressionArray clickPoint:self.point];
 }
 
 - (void)switchClickTypeWith:(NSURL *)url {
@@ -270,7 +271,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(yumiMobileInterstitialDidReceiveAd:)]) {
         [self.delegate yumiMobileInterstitialDidReceiveAd:self];
     }
-    [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.impressionArray clickPoint:self.point];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
