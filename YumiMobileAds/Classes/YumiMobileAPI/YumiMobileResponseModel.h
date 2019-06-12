@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *desc;
 @property (nonatomic) NSString *logoUrl;
+@property (nonatomic, assign) float adW;
+@property (nonatomic, assign) float adH;
 
 @end
 

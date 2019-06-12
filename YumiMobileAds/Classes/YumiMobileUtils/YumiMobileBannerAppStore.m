@@ -1,28 +1,38 @@
 //
-//  YumiMobileAppStore.m
-//  YumiMobileAds
+//  YumiAppStore.m
+//  Expecta
 //
-//  Created by 王泽永 on 2019/6/11.
+//  Created by d on 17/5/2018.
 //
 
-#import "YumiMobileAppStore.h"
+#import "YumiMobileBannerAppStore.h"
 #import "YumiMobileTools.h"
 #import "YumiMobileConstants.h"
 #import <StoreKit/StoreKit.h>
 
-@interface YumiMobileAppStore ()
+@interface YumiMobileBannerAppStore () <SKStoreProductViewControllerDelegate>
+
 @property (nonatomic) NSString *iTunesLink;
 @property (nonatomic, assign) BOOL appStoreLoaded;
+
 @property (nonatomic) SKStoreProductViewController *appStore;
+
 @end
 
-@implementation YumiMobileAppStore
-- (instancetype)initWithItunesLink:(NSString *)linkUrl {
-    self = [super init];
+@implementation YumiMobileBannerAppStore
+
++ (instancetype)sharedYumiMobileAppStore {
+    static YumiMobileBannerAppStore *_instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[self alloc] init];
+    });
+    return _instance;
+}
+
+- (void)setItunesLink:(NSString *)linkUrl {
     self.iTunesLink = linkUrl;
     [self preloadStoreProductView];
-    
-    return self;
 }
 
 - (void)present {
@@ -48,13 +58,13 @@
     __weak typeof(self) weakSelf = self;
     self.appStoreLoaded = NO;
     [self.appStore
-     loadProductWithParameters:parameters
-     completionBlock:^(BOOL result, NSError *_Nullable error) {
-         if (error) {
-             return;
-         }
-         weakSelf.appStoreLoaded = result;
-     }];
+        loadProductWithParameters:parameters
+                  completionBlock:^(BOOL result, NSError *_Nullable error) {
+                      if (error) {
+                          return;
+                      }
+                      weakSelf.appStoreLoaded = result;
+                  }];
 }
 
 - (void)openAppStore:(NSString *)iTunesLink {
@@ -78,4 +88,5 @@
         self.appStoreLoaded = NO;
     }
 }
+
 @end

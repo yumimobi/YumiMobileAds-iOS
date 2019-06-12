@@ -17,7 +17,9 @@
              @"materailType" : @"inventory_type",
              @"clickArray" : @"click_trackers",
              @"impressionArray" : @"imp_trackers",
-             @"closeArray" : @"close_trackers"
+             @"closeArray" : @"close_trackers",
+             @"adW" : @"w",
+             @"adH" : @"h"
              };
 }
 

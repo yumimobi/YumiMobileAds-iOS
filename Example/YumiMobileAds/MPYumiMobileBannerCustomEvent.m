@@ -7,7 +7,7 @@
 //
 
 #import "MPYumiMobileBannerCustomEvent.h"
-#import <YumiMobileAds/YumiMobileBanner.h>
+#import "YumiMobileBanner.h"
 
 @interface MPYumiMobileBannerCustomEvent ()<YumiMobileBannerDelegate>
 @property (nonatomic) YumiMobileBanner *yumiBanner;

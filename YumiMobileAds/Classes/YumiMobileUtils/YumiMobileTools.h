@@ -64,5 +64,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIViewController *)topMostController;
 - (BOOL)iSSimplifiedChinese;
 - (NSString *)timestamp;
+- (CGFloat)adaptedValue6:(CGFloat)size;
 @end
 NS_ASSUME_NONNULL_END
