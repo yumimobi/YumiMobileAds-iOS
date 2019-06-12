@@ -5,6 +5,7 @@ platform :ios, '9.0'
 target 'YumiMobileAds_Example' do
   pod 'YumiMobileAds', :path => '../'
   pod 'mopub-ios-sdk'
+  pod 'AppCenter'
 
   target 'YumiMobileAds_Tests' do
     inherit! :search_paths
