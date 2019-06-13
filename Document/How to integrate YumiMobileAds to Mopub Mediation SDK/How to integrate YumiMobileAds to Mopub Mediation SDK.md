@@ -1,4 +1,13 @@
-[TOC]
+- [How to integrate YumiMobileAds to Mopub Mediation SDK](#how-to-integrate-yumimobileads-to-mopub-mediation-sdk)
+	- [iOS](#ios)
+		- [1. Cocoapods](#1-cocoapods)
+		- [2. Manual](#2-manual)
+	- [Android](#android)
+		- [1. Gradle](#1-gradle)
+		- [2. Manual](#2-manual-1)
+	- [Add new custom sdk network in Mopub dashboard](#add-new-custom-sdk-network-in-mopub-dashboard)
+	- [Test ID](#test-id)
+
 # How to integrate YumiMobileAds to Mopub Mediation SDK
 ## iOS
 ### 1. Cocoapods 
