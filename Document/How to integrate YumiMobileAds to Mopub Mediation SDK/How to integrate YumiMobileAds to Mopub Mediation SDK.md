@@ -16,7 +16,7 @@ Enter the following line in your podfile:
 pod 'YumiMobileAdsForMopub'
 ```
 ### 2. Manual
-1. [DownloadSourceFiles](https://adsdk.yumimobi.com/YumiMobileAds/Yumi_0.1.0.zip)
+1. [DownloadSourceFiles](https://adsdk.yumimobi.com/YumiMobileAds/Yumi_1.0.0.zip)
 2. Add source files to your Xcode project.
 	Make sure you have selected the `copy item if needed`
 	![Alt text](./1560415938839.png)
