@@ -6,7 +6,7 @@
 //  Copyright © 2019 wzy2010416033@163.com. All rights reserved.
 //
 
-#import <MoPub/MoPub.h>
+#import "MoPub.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

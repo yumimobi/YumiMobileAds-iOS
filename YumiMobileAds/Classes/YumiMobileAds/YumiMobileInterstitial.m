@@ -201,8 +201,8 @@
         finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobileDescConstant withString:self.ad.desc];
     }
     // logo url
-    if (finalHtml.length && [finalHtml rangeOfString:YumiMobiletargetUrlConstant].location != NSNotFound && self.ad.logoUrl.length) {
-        finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobiletargetUrlConstant withString:self.ad.logoUrl];
+    if (finalHtml.length && [finalHtml rangeOfString:YumiMobileLogoUrlConstant].location != NSNotFound && self.ad.logoUrl.length) {
+        finalHtml = [finalHtml stringByReplacingOccurrencesOfString:YumiMobileLogoUrlConstant withString:self.ad.logoUrl];
     }
     [self.web loadHTMLString:finalHtml baseURL:nil];
 }
