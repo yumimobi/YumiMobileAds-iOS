@@ -90,8 +90,7 @@
      appID:self.appID
      placementID:self.placementID
      adType:kYumiMobileAdInterstitial
-     adSize:self.adSize
-     gdprConsentStatus:gdprConsentStatus];
+     adSize:self.adSize];
     __weak __typeof(self)weakSelf = self;
     // request server
     [[YumiMobileRequestManager sharedManager]
@@ -154,6 +153,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(yumiMobileInterstitialWillDisappear:)]) {
         [self.delegate yumiMobileInterstitialWillDisappear:self];
     }
+    [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.closeArray clickPoint:self.point];
 }
 
 - (void)setUpInterstitialMaterial {
@@ -229,6 +229,7 @@
     if ([self.delegate respondsToSelector:@selector(yumiMobileInterstitialWillAppear:)]) {
         [self.delegate yumiMobileInterstitialWillAppear:self];
     }
+    [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.impressionArray clickPoint:self.point];
 }
 
 - (void)switchClickTypeWith:(NSURL *)url {
@@ -270,7 +271,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(yumiMobileInterstitialDidReceiveAd:)]) {
         [self.delegate yumiMobileInterstitialDidReceiveAd:self];
     }
-    [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.impressionArray clickPoint:self.point];
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
