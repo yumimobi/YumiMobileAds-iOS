@@ -19,7 +19,8 @@
              @"impressionArray" : @"imp_trackers",
              @"closeArray" : @"close_trackers",
              @"adW" : @"w",
-             @"adH" : @"h"
+             @"adH" : @"h",
+             @"logoUrl" : @"logo_url"
              };
 }
 
