@@ -18,7 +18,7 @@ PODS:
     - mopub-ios-sdk/Avid
     - mopub-ios-sdk/Core
     - mopub-ios-sdk/Moat
-  - YumiMobileAds (0.1.0)
+  - YumiMobileAds (1.0.1)
 
 DEPENDENCIES:
   - AppCenter
@@ -37,7 +37,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppCenter: 6a5ff2fd007b53431259fdd74f91eb3d0dfea3d1
   mopub-ios-sdk: b1167e8c86afaccd37d484828c4ad2c3c1656a32
-  YumiMobileAds: 4c3e93f3a0afc6404043705c775fcbc915c927ad
+  YumiMobileAds: 394cf71012f02f2f738840a8db6dcb9433dd2960
 
 PODFILE CHECKSUM: a7de162a30d14fac8250dce26bf534d8a0a383fd
 
