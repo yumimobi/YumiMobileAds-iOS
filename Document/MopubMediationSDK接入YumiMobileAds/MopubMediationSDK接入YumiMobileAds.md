@@ -57,8 +57,8 @@ dependencies {
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<!--需要添加此权限去获取设备的imei信息，如果不添加将影响广告收入-->
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--需要添加此权限去获取设备的imei信息，如果不添加将影响广告收入-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 ```
 
 ### 2. SDK源码接入步骤
@@ -114,8 +114,8 @@ dependencies {
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<!--需要添加此权限去获取设备的imei信息，如果不添加将影响广告收入-->
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--需要添加此权限去获取设备的imei信息，如果不添加将影响广告收入-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 ```
 
 ### 3. 注意事项
