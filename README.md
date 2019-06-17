@@ -9,20 +9,9 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
-
-## Installation
-
-YumiMobileAds is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'YumiMobileAds'
-```
-
-## Author
-
-wzy2010416033@163.com, wzy2010416033@163.com
+## Document
+[开始使用](/Document/MopubMediationSDK接入YumiMobileAds/MopubMediationSDK接入YumiMobileAds.md)
+[Get Started](/Document/HowToIntegrateYumiMobileAdsToMopubMediationSDK/HowToIntegrateYumiMobileAdsToMopubMediationSDK.md)
 
 ## License
 
