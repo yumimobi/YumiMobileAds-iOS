@@ -40,7 +40,7 @@
 
 /* Begin PBXFileReference section */
 		18841CE23A574EE609F88F6A /* Pods-YumiMobileAds_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumiMobileAds_Tests.debug.xcconfig"; path = "Target Support Files/Pods-YumiMobileAds_Tests/Pods-YumiMobileAds_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		1BD2E91CE498D96D376E5439 /* YumiMobileAds.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = YumiMobileAds.podspec; path = ../YumiMobileAds.podspec; sourceTree = "<group>"; };
+		1BD2E91CE498D96D376E5439 /* YumiMobileAds.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = YumiMobileAds.podspec; path = ../YumiMobileAds.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2B2293030D0034D9197956AA /* Pods-YumiMobileAds_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumiMobileAds_Example.release.xcconfig"; path = "Target Support Files/Pods-YumiMobileAds_Example/Pods-YumiMobileAds_Example.release.xcconfig"; sourceTree = "<group>"; };
 		2F085F43E0AF30F46D73D1C0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		32CA7BD0D2ECA0760D5C3C09 /* Pods_YumiMobileAds_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumiMobileAds_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
