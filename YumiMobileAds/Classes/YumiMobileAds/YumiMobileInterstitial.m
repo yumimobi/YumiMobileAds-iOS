@@ -105,6 +105,26 @@
 }
 
 - (void)setUpUI {
+    // close button
+    NSString *path = [[[YumiMobileTools sharedTool] resourcesBundleWithBundleName:@"YumiMobileAds"] pathForResource:@"yumi_close" ofType:@"png"];
+    UIImage *closeImg = [[UIImage alloc] initWithContentsOfFile:path];
+    CGFloat closeButtonW = [[YumiMobileTools sharedTool] adaptedValue6:30];
+    CGFloat closebuttonH = [[YumiMobileTools sharedTool] adaptedValue6:30];
+    CGFloat margin = [[YumiMobileTools sharedTool] adaptedValue6:10];
+    CGFloat topMargin = [[YumiMobileTools sharedTool] adaptedValue6:10];
+    CGFloat bottomMargin = [[YumiMobileTools sharedTool] adaptedValue6:10];
+    if ([[YumiMobileTools sharedTool] isiPhoneX]) {
+        topMargin = kIPHONEXSTATUSBAR;
+        bottomMargin = kIPHONEXHOMEINDICATOR;
+    }
+    if ([[YumiMobileTools sharedTool] isiPhoneXR]) {
+        topMargin = kIPHONEXRSTATUSBAR;
+        bottomMargin = kIPHONEXRHOMEINDICATOR;
+    }
+    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake((kSCREEN_WIDTH-closeButtonW-margin), topMargin, closeButtonW, closebuttonH)];
+    [closeButton setBackgroundImage:closeImg forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(closeYumiMobileInterstitial) forControlEvents:UIControlEventTouchUpInside];
+    // web
     self.view.frame = [UIScreen mainScreen].bounds;
     self.view.backgroundColor = [UIColor blackColor];
     CGFloat proportionWidth = 1.0f;
@@ -118,6 +138,9 @@
     CGFloat adW = self.ad.adW * proportionWidth;
     CGFloat adH = self.ad.adH * proportionHeight;
     self.web = [[WKWebView alloc] initWithFrame:CGRectMake((kSCREEN_WIDTH - adW)/2, (kSCREEN_HEIGHT - adH)/2, adW, adH)];
+    if ([[YumiMobileTools sharedTool] isiPhoneX] || [[YumiMobileTools sharedTool] isiPhoneXR]) {
+        self.web.frame = CGRectMake((kSCREEN_WIDTH-adW)/2, topMargin, adW, adH-topMargin-bottomMargin);
+    }
     self.web.navigationDelegate = self;
     self.web.scrollView.scrollEnabled = NO;
     if (@available(iOS 11, *)) {
@@ -129,22 +152,6 @@
     self.web.userInteractionEnabled = YES;
     [self.web addGestureRecognizer:tapG];
     [self.view addSubview:self.web];
-    // close button
-    NSString *path = [[[YumiMobileTools sharedTool] resourcesBundleWithBundleName:@"YumiMobileAds"] pathForResource:@"yumi_close" ofType:@"png"];
-    UIImage *closeImg = [[UIImage alloc] initWithContentsOfFile:path];
-    CGFloat closeButtonW = [[YumiMobileTools sharedTool] adaptedValue6:30];
-    CGFloat closebuttonH = [[YumiMobileTools sharedTool] adaptedValue6:30];
-    CGFloat margin = [[YumiMobileTools sharedTool] adaptedValue6:10];
-    CGFloat topMargin = [[YumiMobileTools sharedTool] adaptedValue6:10];
-    if ([[YumiMobileTools sharedTool] isiPhoneX]) {
-        topMargin += kIPHONEXSTATUSBAR;
-    }
-    if ([[YumiMobileTools sharedTool] isiPhoneXR]) {
-        topMargin += kIPHONEXRSTATUSBAR;
-    }
-    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake((kSCREEN_WIDTH-closeButtonW-margin), topMargin, closeButtonW, closebuttonH)];
-    [closeButton setBackgroundImage:closeImg forState:UIControlStateNormal];
-    [closeButton addTarget:self action:@selector(closeYumiMobileInterstitial) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
 }
 
