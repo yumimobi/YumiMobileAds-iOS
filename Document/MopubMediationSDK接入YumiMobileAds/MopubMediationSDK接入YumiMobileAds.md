@@ -57,7 +57,7 @@ dependencies {
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<!--此权限受Android系统限制，请添加，如果不添加将影响广告收入-->
+	<!--需要添加此权限去获取设备的imei信息，如果不添加将影响广告收入-->
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 ```
 
@@ -114,7 +114,7 @@ dependencies {
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<!--此权限受Android系统限制，请添加，如果不添加将影响广告收入-->
+	<!--需要添加此权限去获取设备的imei信息，如果不添加将影响广告收入-->
 	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 ```
 
@@ -153,11 +153,11 @@ dependencies {
 	- Android banner:
 		- custom event class 应该为 `com.yumi.api.ads.mopubadapter.YumiMopubAdxBanner`
 		- custom event class data 应该为
-			`{ "sspToken":"YOUR_SSPTOKEN", "appID" : "YOUR_APP_ID", "placementID" : "Your_PLACEMENT_ID" }`
+			`{ "sspToken":"YOUR_SSPTOKEN", "appId" : "YOUR_APP_ID", "placementId" : "Your_PLACEMENT_ID" }`
 	- Android interstitial:
 		- custom event class 应该为 `com.yumi.api.ads.mopubadapter.YumiMopubAdxInterstitial`
 		- custom event class data 应该为
-			`{ "sspToken":"YOUR_SSPTOKEN", "appID" : "YOUR_APP_ID", "placementID" : "Your_PLACEMENT_ID" }` 
+			`{ "sspToken":"YOUR_SSPTOKEN", "appId" : "YOUR_APP_ID", "placementId" : "Your_PLACEMENT_ID" }` 
 	![Alt text](./1560409912883.png)
 5. 确保 network status is running.
 	![Alt text](./1560410523146.png)
