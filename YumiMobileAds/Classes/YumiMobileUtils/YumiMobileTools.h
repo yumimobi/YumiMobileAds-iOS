@@ -56,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isAdTrackingEnabled;
 - (BOOL)isInterfaceOrientationPortrait;
 - (NSBundle *_Nullable)resourcesBundleWithBundleName:(NSString *)bundleName;
+- (NSBundle *)returnMainBundle;
 - (void)setUpdateIPInterval:(NSTimeInterval)interval;
 - (NSString *)fetchItunesIdWith:(NSString *)tempString;
 - (void)openBySystemMethod:(NSURL *)openUrl;
