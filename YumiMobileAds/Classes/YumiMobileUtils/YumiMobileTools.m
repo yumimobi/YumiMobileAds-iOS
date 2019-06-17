@@ -357,6 +357,10 @@
     return [NSBundle bundleWithURL:bundleURL];
 }
 
+- (NSBundle *)returnMainBundle {
+    return [NSBundle mainBundle];
+}
+
 - (NSString *)ip {
     return _ip.length ? _ip : @"127.0.0.1";
 }
