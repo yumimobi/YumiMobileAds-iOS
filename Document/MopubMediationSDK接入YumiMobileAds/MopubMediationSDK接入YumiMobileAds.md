@@ -17,7 +17,7 @@
 pod 'YumiMobileAdsForMopub'
 ```
 ### 2. 手动接入
-1. [下载源文件](https://adsdk.yumimobi.com/YumiMobileAds/Yumi_1.0.0.zip)
+1. [下载源文件](https://adsdk.yumimobi.com/YumiMobileAds/Yumi_1.0.1.zip)
 2. 添加源文件到 Xcode 工程.
 	确保勾选 `copy item if needed`
 	![Alt text](./1560415938839.png)
