@@ -46,7 +46,7 @@ allprojets {
 
 //在 module 的 build.gradle 中添加依赖
 dependencies {
-    implementation 'com.yumimobi.ads:yumimobileads:0.1.4'
+    implementation 'com.yumimobi.ads:yumimobileads:1.0.0'
 ｝
 ```
 **第二步：请将Android Demo中的Mopub Adapter添加到你的项目中**
