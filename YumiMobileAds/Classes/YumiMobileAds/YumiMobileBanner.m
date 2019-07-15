@@ -230,7 +230,7 @@
     [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.impressionArray clickPoint:self.point];
 }
 
-- (void)webView:(WKWebView *)webView didFailNavigationc:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     [self errorHandler:error];
 }
 
