@@ -166,6 +166,29 @@
 }
 
 - (void)switchClickTypeWith:(NSURL *)url {
+    // replace define
+    CGFloat x = 999;
+    CGFloat y = 999;
+    if (self.point.x || self.point.y) {
+        x = self.point.x;
+        y = self.point.y;
+    }
+    NSString *timeStamp = [[YumiMobileTools sharedTool] timestamp];
+    NSDictionary *replaceStr = @{
+                                 @"YUMI_ADSERVICE_CLICK_DOWN_X" : @(x),
+                                 @"YUMI_ADSERVICE_CLICK_DOWN_Y" : @(y),
+                                 @"YUMI_ADSERVICE_CLICK_UP_X" : @(x),
+                                 @"YUMI_ADSERVICE_CLICK_UP_Y" : @(y),
+                                 @"YUMI_ADSERVICE_UNIX_ORIGIN_TIME" : timeStamp,
+                                 };
+    __block NSString *urlString = [NSString stringWithFormat:@"%@", url];
+    if (![urlString isKindOfClass:[NSNull class]] && urlString) {
+        [replaceStr enumerateKeysAndObjectsUsingBlock:^(id _Nonnull key, id _Nonnull obj, BOOL *_Nonnull stop) {
+            urlString =
+            [urlString stringByReplacingOccurrencesOfString:key withString:[NSString stringWithFormat:@"%@", obj]];
+        }];
+    }
+    url = [NSURL URLWithString:urlString];
     // 1，2 浏览器
     // 6，8 App Store
     // 7 deeplink
@@ -207,7 +230,7 @@
     [[YumiMobileRequestManager sharedManager] sendTrackerUrl:self.ad.impressionArray clickPoint:self.point];
 }
 
-- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailNavigationc:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     [self errorHandler:error];
 }
 
