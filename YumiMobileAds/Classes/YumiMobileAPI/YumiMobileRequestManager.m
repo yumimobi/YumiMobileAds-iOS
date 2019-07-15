@@ -88,8 +88,8 @@
 
 - (void)sendTrackerUrl:(NSArray<NSString *> *)trackerUrls
             clickPoint:(CGPoint)clickPoint {
-    CGFloat x = 999;
-    CGFloat y = 999;
+    CGFloat x = -999;
+    CGFloat y = -999;
     if (clickPoint.x || clickPoint.y) {
         x = clickPoint.x;
         y = clickPoint.y;

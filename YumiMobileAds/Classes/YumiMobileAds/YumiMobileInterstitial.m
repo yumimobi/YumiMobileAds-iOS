@@ -241,8 +241,8 @@
 
 - (void)switchClickTypeWith:(NSURL *)url {
     // replace define
-    CGFloat x = 999;
-    CGFloat y = 999;
+    CGFloat x = -999;
+    CGFloat y = -999;
     if (self.point.x || self.point.y) {
         x = self.point.x;
         y = self.point.y;
