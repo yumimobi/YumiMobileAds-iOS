@@ -232,6 +232,7 @@
 
 - (void)presentFromRootViewController:(UIViewController *)viewController {
     self.rootViewController = viewController;
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
     [viewController presentViewController:self animated:NO completion:nil];
     if ([self.delegate respondsToSelector:@selector(yumiMobileInterstitialWillAppear:)]) {
         [self.delegate yumiMobileInterstitialWillAppear:self];
