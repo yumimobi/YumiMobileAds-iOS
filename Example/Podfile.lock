@@ -1,23 +1,26 @@
 PODS:
-  - AppCenter (2.0.1):
-    - AppCenter/Analytics (= 2.0.1)
-    - AppCenter/Crashes (= 2.0.1)
-  - AppCenter/Analytics (2.0.1):
+  - AppCenter (3.1.0):
+    - AppCenter/Analytics (= 3.1.0)
+    - AppCenter/Crashes (= 3.1.0)
+  - AppCenter/Analytics (3.1.0):
     - AppCenter/Core
-  - AppCenter/Core (2.0.1)
-  - AppCenter/Crashes (2.0.1):
+  - AppCenter/Core (3.1.0)
+  - AppCenter/Crashes (3.1.0):
     - AppCenter/Core
-  - mopub-ios-sdk (5.7.1):
-    - mopub-ios-sdk/MoPubSDK (= 5.7.1)
-  - mopub-ios-sdk/Avid (5.7.1):
+  - mopub-ios-sdk (5.12.0):
+    - mopub-ios-sdk/MoPubSDK (= 5.12.0)
+  - mopub-ios-sdk/Avid (5.12.0):
     - mopub-ios-sdk/Core
-  - mopub-ios-sdk/Core (5.7.1)
-  - mopub-ios-sdk/Moat (5.7.1):
+  - mopub-ios-sdk/Core (5.12.0)
+  - mopub-ios-sdk/Moat (5.12.0):
     - mopub-ios-sdk/Core
-  - mopub-ios-sdk/MoPubSDK (5.7.1):
+  - mopub-ios-sdk/MoPubSDK (5.12.0):
     - mopub-ios-sdk/Avid
     - mopub-ios-sdk/Core
     - mopub-ios-sdk/Moat
+    - mopub-ios-sdk/NativeAds
+  - mopub-ios-sdk/NativeAds (5.12.0):
+    - mopub-ios-sdk/Core
   - YumiMobileAds (1.0.1)
 
 DEPENDENCIES:
@@ -35,8 +38,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AppCenter: 6a5ff2fd007b53431259fdd74f91eb3d0dfea3d1
-  mopub-ios-sdk: b1167e8c86afaccd37d484828c4ad2c3c1656a32
+  AppCenter: a1c30c47b7882a04a615ffa5ab26c007326436d8
+  mopub-ios-sdk: bb61d5741ba16c6a78e5a54e37bc60ef8c9a80a8
   YumiMobileAds: 394cf71012f02f2f738840a8db6dcb9433dd2960
 
 PODFILE CHECKSUM: a7de162a30d14fac8250dce26bf534d8a0a383fd
