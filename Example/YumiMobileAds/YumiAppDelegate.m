@@ -17,12 +17,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // init mopub
-    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:@"fbd076b7ac6d4cd78e37fa62ff5dbc11"];
-    
+    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:@"637cd2fa5d9e43b9a2538a219a693ee6"];
+
     sdkConfig.loggingLevel = MPBLogLevelInfo;
     [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
         NSLog(@"SDK initialization complete");
     }];
+    
     // init app center
     [MSAppCenter start:@"890e833e-b3a3-41e9-a723-e0b0df97c895" withServices:@[
                                                                               [MSAnalytics class],

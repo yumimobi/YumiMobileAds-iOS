@@ -91,12 +91,9 @@
 
 - (void)requestBannerAd {
     if (!self.MPbanner) {
-        self.MPbanner = [[MPAdView alloc] initWithAdUnitId:@"fbd076b7ac6d4cd78e37fa62ff5dbc11"
-                                                    size:MOPUB_BANNER_SIZE];
+        self.MPbanner = [[MPAdView alloc] initWithAdUnitId:@"637cd2fa5d9e43b9a2538a219a693ee6"];
         self.MPbanner.delegate = self;
-        self.MPbanner.frame = CGRectMake((screenWidth - MOPUB_BANNER_SIZE.width) / 2,
-                                       screenHeight - MOPUB_BANNER_SIZE.height - 34,
-                                       MOPUB_BANNER_SIZE.width, MOPUB_BANNER_SIZE.height);
+        self.MPbanner.frame = CGRectMake((screenWidth - 320) / 2,screenHeight - 50 - 34,320, 50);
         [self.view addSubview:self.MPbanner];
     }
     [self.MPbanner loadAd];
@@ -104,7 +101,7 @@
 
 - (void)requestInterstitialAd {
     self.interstitial = [MPInterstitialAdController
-                         interstitialAdControllerForAdUnitId:@"76594f39485b4ad696e11cb9192cc202"];
+                         interstitialAdControllerForAdUnitId:@"e58a60e0178e4c6f9fe01a710636d136"];
     self.interstitial.delegate = self;
     [self.interstitial loadAd];
 }
