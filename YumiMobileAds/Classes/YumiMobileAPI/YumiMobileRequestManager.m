@@ -55,7 +55,7 @@
                           failure:(void (^)(NSError *error))failure {
     NSMutableURLRequest *request = [[YMHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:yumiMobileRequestURL parameters:nil error:nil];
     [request setValue:[YumiMobileTools sharedTool].userAgent forHTTPHeaderField:@"User-Agent"];
-    [request setValue:[YumiMobileTools sharedTool].ip forHTTPHeaderField:@"X-Forwarded-For"];
+//    [request setValue:[YumiMobileTools sharedTool].ip forHTTPHeaderField:@"X-Forwarded-For"];
     
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[model ym_modelToJSONObject] options:NSJSONWritingPrettyPrinted error:&error];
