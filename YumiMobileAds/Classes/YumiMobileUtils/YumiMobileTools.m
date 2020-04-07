@@ -13,6 +13,7 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #include <sys/sysctl.h>
 
 #define IPURL @"https://corn.yumimobi.com/api/getip.php"
@@ -45,6 +46,9 @@
 
 @property (nonatomic) NSTimer *updateIPTimer;
 @property (nonatomic) NSString *language;
+
+//This wkWebView for userAgent
+@property (nonatomic)  WKWebView *wkWebView;
 @end
 
 @implementation YumiMobileTools
@@ -71,8 +75,10 @@
     [self updateIP];
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectZero];
-        weakSelf.userAgent = [web stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+        weakSelf.wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero];
+        [weakSelf.wkWebView evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError *error) {
+            weakSelf.userAgent = result;
+         }];
     });
     return self;
 }
