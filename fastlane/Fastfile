@@ -23,7 +23,7 @@ platform :ios do
 
   desc "Submit a new Beta Build to App Center"
   lane :pushToAppCenter do
-    xcversion(version: "10.2")
+    xcversion(version: "11.1")
 
     # Build
     gym(
