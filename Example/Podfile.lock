@@ -26,7 +26,7 @@ DEPENDENCIES:
   - YumiMobileAds (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - AppCenter
     - mopub-ios-sdk
 
@@ -41,4 +41,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a7de162a30d14fac8250dce26bf534d8a0a383fd
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.9.0
