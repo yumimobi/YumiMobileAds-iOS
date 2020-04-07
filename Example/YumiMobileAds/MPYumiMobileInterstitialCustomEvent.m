@@ -15,7 +15,8 @@
 @end
 
 @implementation MPYumiMobileInterstitialCustomEvent
-- (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info{
+- (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info
+                                      adMarkup:(NSString *)adMarkup {
     NSString *sspToken = [info objectForKey:@"sspToken"];
     NSString *appID = [info objectForKey:@"appID"];
     NSString *placementID =  [info objectForKey:@"placementID"];

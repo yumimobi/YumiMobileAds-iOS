@@ -15,7 +15,9 @@
 @end
 
 @implementation MPYumiMobileBannerCustomEvent
-- (void)requestAdWithSize:(CGSize)size customEventInfo:(NSDictionary *)info {
+- (void)requestAdWithSize:(CGSize)size
+          customEventInfo:(NSDictionary *)info
+                 adMarkup:(NSString *)adMarkup {
     NSString *sspToken = [info objectForKey:@"sspToken"];
     NSString *appID = [info objectForKey:@"appID"];
     NSString *placementID =  [info objectForKey:@"placementID"];
