@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'YumiMobileAdsForMopub'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = 'YumiMobileAds for iOS.'
   s.description      = 'The Yumi Mobile Ads SDK is the latest generation in Yumi mobile advertising featuring refined ad formats and streamlined APIs for access to mobile ad networks and advertising solutions. The SDK enables mobile app developers to maximize their monetization on Android and iOS. The Yumi Mobile Ads SDK is available to customers.' 
   s.homepage         = 'https://www.yumimobi.com'
