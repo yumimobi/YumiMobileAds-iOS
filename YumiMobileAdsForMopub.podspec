@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/yumimobi/YumiMobileAds-iOS.git', :tag => s.version.to_s }
   s.ios.deployment_target = '9.0'
   s.source_files = 'Example/YumiMobileAds/MPYumiMobileBannerCustomEvent.{h,m}','Example/YumiMobileAds/MPYumiMobileinterstitialCustomEvent.{h,m}'
-  s.dependency 'YumiMobileAds'
+  s.dependency 'YumiMobileAds', '1.0.3'
   s.dependency 'mopub-ios-sdk'
 
 end
